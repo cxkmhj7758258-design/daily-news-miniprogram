@@ -1,17 +1,12 @@
-<view class="page">
-  <view class="article-header">
-    <view class="article-category">{{category}}</view>
-    <view class="article-title">{{title}}</view>
-    <view class="article-meta">
-      <text class="meta-source">{{source}}</text>
-      <text class="meta-time">{{time}}</text>
-    </view>
+<view class="ap">
+  <view class="ap__cat">{{cat}}</view>
+  <view class="ap__title">{{title}}</view>
+  <view class="ap__meta">{{source}} · {{time}}</view>
+  <view class="ap__body">
+    <text>{{summary}}</text>
   </view>
-  <view class="article-body">
-    <text class="article-content">{{content}}</text>
-  </view>
-  <view class="article-footer">
-    <button class="btn-secondary" bindtap="goBack">返回早报</button>
-    <button class="btn-primary share-btn" open-type="share">分享</button>
+  <view class="ap__ft">
+    <button class="btn" style="flex:1" bind:tap="back">← 返回</button>
+    <button class="btn" style="flex:1;background:#f0efeb;color:var(--text);margin-left:16rpx" bind:tap="onShare">分享 ↗</button>
   </view>
 </view>

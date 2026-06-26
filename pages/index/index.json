@@ -1,7 +1,6 @@
 {
-  "usingComponents": {
-    "news-card": "/components/news-card/news-card"
-  },
+  "usingComponents": {},
   "enablePullDownRefresh": true,
-  "backgroundColor": "#f5f5f5"
+  "backgroundColor": "#f5f5f7",
+  "navigationBarTitleText": "每日早报"
 }

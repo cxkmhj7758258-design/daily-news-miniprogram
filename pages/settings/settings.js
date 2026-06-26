@@ -1,83 +1,47 @@
 Page({
-  data: {
-    categories: [],
-    selectedCount: 0,
-    enablePush: true,
-    pushTime: '08:00',
-    showSuccess: false
-  },
+  data: { cats: [], cnt: 0, push: true, ptime: '08:00' },
 
-  onLoad() {
-    this.loadCategories()
-    this.loadPushSettings()
-  },
+  onLoad() { this.loadCats(); this.loadPush() },
 
-  loadCategories() {
+  loadCats() {
+    const sel = wx.getStorageSync('selectedCategories') || []
     const app = getApp()
-    const selected = wx.getStorageSync('selectedCategories') || []
-    const categories = app.globalData.categories.map(c => ({
-      ...c,
-      selected: selected.includes(c.id)
-    }))
-    this.setData({
-      categories,
-      selectedCount: categories.filter(c => c.selected).length
-    })
+    const cats = app.globalData.categories.map(c => ({ ...c, sel: sel.includes(c.id) }))
+    this.setData({ cats, cnt: cats.filter(c => c.sel).length })
   },
 
-  loadPushSettings() {
-    const enablePush = wx.getStorageSync('enablePush')
-    const pushTime = wx.getStorageSync('pushTime')
-    this.setData({
-      enablePush: enablePush !== '' ? enablePush : true,
-      pushTime: pushTime || '08:00'
-    })
+  loadPush() {
+    const push = wx.getStorageSync('enablePush')
+    const ptime = wx.getStorageSync('pushTime')
+    this.setData({ push: push !== '' ? push : true, ptime: ptime || '08:00' })
   },
 
-  toggleCategory(e) {
+  tog(e) {
     const id = e.currentTarget.dataset.id
-    const categories = this.data.categories.map(c => {
-      if (c.id === id) {
-        return { ...c, selected: !c.selected }
-      }
-      return c
-    })
-    const selectedCount = categories.filter(c => c.selected).length
-    this.setData({ categories, selectedCount })
+    const cats = this.data.cats.map(c => c.id === id ? { ...c, sel: !c.sel } : c)
+    const cnt = cats.filter(c => c.sel).length
+    if (cnt < 3 && !cats.find(c => c.id === id).sel) {
+      wx.showToast({ title: '至少选3个领域', icon: 'none' })
+      return
+    }
+    this.setData({ cats, cnt })
   },
 
-  saveSettings() {
-    const selected = this.data.categories.filter(c => c.selected).map(c => c.id)
-    wx.setStorageSync('selectedCategories', selected)
-    wx.setStorageSync('enablePush', this.data.enablePush)
-    wx.setStorageSync('pushTime', this.data.pushTime)
-
-    this.setData({ showSuccess: true })
-    setTimeout(() => {
-      this.setData({ showSuccess: false })
-    }, 2500)
-
-    // 如果有云开发，同步到云数据库
+  save() {
+    const sel = this.data.cats.filter(c => c.sel).map(c => c.id)
+    if (sel.length < 3) { wx.showToast({ title: '至少选3个领域', icon: 'none' }); return }
+    wx.setStorageSync('selectedCategories', sel)
+    wx.setStorageSync('enablePush', this.data.push)
+    wx.setStorageSync('pushTime', this.data.ptime)
+    wx.showToast({ title: '保存成功', icon: 'success' })
     if (wx.cloud) {
       wx.cloud.callFunction({
         name: 'userManager',
-        data: {
-          action: 'updatePreferences',
-          categories: selected,
-          enablePush: this.data.enablePush,
-          pushTime: this.data.pushTime
-        }
+        data: { action: 'updatePreferences', categories: sel, enablePush: this.data.push, pushTime: this.data.ptime }
       }).catch(() => {})
     }
-
-    wx.vibrateShort({ type: 'light' })
   },
 
-  togglePush(e) {
-    this.setData({ enablePush: e.detail.value })
-  },
-
-  onTimeChange(e) {
-    this.setData({ pushTime: e.detail.value })
-  }
+  togPush(e) { this.setData({ push: e.detail.value }) },
+  onTime(e) { this.setData({ ptime: e.detail.value }) }
 })

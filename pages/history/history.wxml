@@ -1,50 +1,42 @@
-<view class="page">
-  <!-- 用户头像区域 -->
-  <view class="user-card">
-    <view class="avatar">{{initials}}</view>
-    <view class="user-info">
-      <text class="user-name">每日早报用户</text>
-      <text class="user-desc">已读 {{readCount}} 篇新闻</text>
+<view class="mp">
+  <view class="mp__hd">
+    <view class="mp__av">早</view>
+    <view class="mp__info">
+      <text class="mp__name">每日早报</text>
+      <text class="mp__desc">已读 {{readCnt}} 篇</text>
     </view>
   </view>
 
-  <!-- 数据概览 -->
-  <view class="stats-grid">
-    <view class="stat-item">
-      <text class="stat-num">{{selectedCount}}</text>
-      <text class="stat-label">关注领域</text>
+  <view class="mp__stats">
+    <view class="ms">
+      <text class="ms__num">{{catCnt}}</text>
+      <text class="ms__label">关注</text>
     </view>
-    <view class="stat-item">
-      <text class="stat-num">{{todayCount}}</text>
-      <text class="stat-label">今日新闻</text>
+    <view class="ms">
+      <text class="ms__num">{{todayCnt}}</text>
+      <text class="ms__label">今日</text>
     </view>
-    <view class="stat-item">
-      <text class="stat-num">{{readCount}}</text>
-      <text class="stat-label">已读</text>
+    <view class="ms">
+      <text class="ms__num">{{readCnt}}</text>
+      <text class="ms__label">已读</text>
     </view>
   </view>
 
-  <!-- 功能菜单 -->
-  <view class="menu-section">
-    <view class="menu-item" bindtap="goSettings">
-      <text class="menu-icon">⚙️</text>
-      <text class="menu-label">关注设置</text>
-      <text class="menu-arrow">›</text>
+  <view class="mp__menu">
+    <view class="mi" bind:tap="goSettings">
+      <text class="mi__icon">⚙️</text>
+      <text class="mi__label">关注设置</text>
+      <text class="mi__arrow">›</text>
     </view>
-    <view class="menu-item" bindtap="clearCache">
-      <text class="menu-icon">🗑️</text>
-      <text class="menu-label">清除缓存</text>
-      <text class="menu-arrow">›</text>
+    <view class="mi" bind:tap="onClear">
+      <text class="mi__icon">🗑️</text>
+      <text class="mi__label">清除缓存</text>
+      <text class="mi__arrow">›</text>
     </view>
-    <view class="menu-item" bindtap="feedback">
-      <text class="menu-icon">💬</text>
-      <text class="menu-label">意见反馈</text>
-      <text class="menu-arrow">›</text>
-    </view>
-    <view class="menu-item" bindtap="about">
-      <text class="menu-icon">ℹ️</text>
-      <text class="menu-label">关于</text>
-      <text class="menu-arrow">›</text>
+    <view class="mi" bind:tap="onAbout">
+      <text class="mi__icon">ℹ️</text>
+      <text class="mi__label">关于</text>
+      <text class="mi__arrow">›</text>
     </view>
   </view>
 </view>
