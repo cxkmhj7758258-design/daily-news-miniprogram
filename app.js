@@ -3,8 +3,10 @@ App({
     categories: [
       { id: 'politics', name: '时政', icon: '🏛️' },
       { id: 'finance', name: '财经', icon: '📊' },
+      { id: 'usStocks', name: '美股', icon: '🇺🇸' },
       { id: 'tech', name: '科技', icon: '📱' },
       { id: 'sports', name: '体育', icon: '⚽' },
+      { id: 'swimming', name: '游泳', icon: '🏊' },
       { id: 'entertainment', name: '娱乐', icon: '🎬' },
       { id: 'health', name: '健康', icon: '💪' },
       { id: 'local', name: '本地', icon: '📍' },
