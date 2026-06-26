@@ -1,0 +1,24 @@
+{
+  "description": "每日新闻早报小程序",
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "enhance": true,
+    "useMultiFrameRuntime": true,
+    "useApiHook": true,
+    "useApiHostProcess": true,
+    "minifyWXSS": true,
+    "minifyWXML": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "3.7.6",
+  "appid": "your-app-id-here",
+  "projectname": "daily-news-miniprogram",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "setting": {
+    "packNpmManually": true,
+    "packNpmRelationList": []
+  }
+}

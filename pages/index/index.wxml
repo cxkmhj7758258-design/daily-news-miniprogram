@@ -1,0 +1,53 @@
+<view class="page-container">
+  <!-- 顶部问候区域 -->
+  <view class="header">
+    <view class="header-date">{{dateStr}}</view>
+    <view class="header-greeting">☀️ 早上好！</view>
+    <view class="header-sub">你的专属早报已送达</view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-container">
+    <loading />
+    <text class="loading-text">正在为你准备早报...</text>
+  </view>
+
+  <!-- 空状态：未选择关注领域 -->
+  <view wx:elif="{{!hasCategories}}" class="empty-container">
+    <text class="empty-icon">📰</text>
+    <text class="empty-title">还没有选择关注领域</text>
+    <text class="empty-desc">去设置中选择你感兴趣的领域\n即可收到每日精选新闻</text>
+    <button class="btn-primary go-setting-btn" bindtap="goSettings">去设置</button>
+  </view>
+
+  <!-- 空状态：暂无新闻 -->
+  <view wx:elif="{{newsList.length === 0 && !loading}}" class="empty-container">
+    <text class="empty-icon">📭</text>
+    <text class="empty-title">今日早报已阅</text>
+    <text class="empty-desc">今天还没有新的新闻推送\n明天早上再来看看吧</text>
+  </view>
+
+  <!-- 新闻列表 -->
+  <view wx:else class="news-list">
+    <!-- 按领域分组标题 -->
+    <view wx:for="{{groupedNews}}" wx:for-item="group" wx:key="category" class="category-group">
+      <view class="category-header">
+        <text class="category-icon">{{group.icon}}</text>
+        <text class="category-name">{{group.name}}</text>
+        <text class="category-count">{{group.list.length}}条</text>
+      </view>
+      <news-card 
+        wx:for="{{group.list}}" 
+        wx:for-item="item" 
+        wx:key="id"
+        article="{{item}}"
+        bind:taparticle="onArticleTap"
+      />
+    </view>
+  </view>
+
+  <!-- 底部 -->
+  <view class="footer" wx:if="{{newsList.length > 0}}">
+    <text class="footer-text">— 明早不见不散 🌅 —</text>
+  </view>
+</view>

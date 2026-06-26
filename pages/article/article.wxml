@@ -1,0 +1,17 @@
+<view class="page">
+  <view class="article-header">
+    <view class="article-category">{{category}}</view>
+    <view class="article-title">{{title}}</view>
+    <view class="article-meta">
+      <text class="meta-source">{{source}}</text>
+      <text class="meta-time">{{time}}</text>
+    </view>
+  </view>
+  <view class="article-body">
+    <text class="article-content">{{content}}</text>
+  </view>
+  <view class="article-footer">
+    <button class="btn-secondary" bindtap="goBack">返回早报</button>
+    <button class="btn-primary share-btn" open-type="share">分享</button>
+  </view>
+</view>

@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/settings/settings",
+    "pages/article/article",
+    "pages/history/history"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#07c160",
+    "navigationBarTitleText": "每日早报",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f5f5"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#07c160",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "今日早报",
+        "iconPath": "images/tabbar/news.png",
+        "selectedIconPath": "images/tabbar/news-active.png"
+      },
+      {
+        "pagePath": "pages/settings/settings",
+        "text": "关注设置",
+        "iconPath": "images/tabbar/settings.png",
+        "selectedIconPath": "images/tabbar/settings-active.png"
+      },
+      {
+        "pagePath": "pages/history/history",
+        "text": "我的",
+        "iconPath": "images/tabbar/mine.png",
+        "selectedIconPath": "images/tabbar/mine-active.png"
+      }
+    ]
+  },
+  "usingComponents": {
+    "news-card": "/components/news-card/news-card"
+  },
+  "sitemapLocation": "sitemap.json",
+  "cloud": true
+}

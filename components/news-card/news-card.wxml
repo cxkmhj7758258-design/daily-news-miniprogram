@@ -1,0 +1,9 @@
+<view class="news-card" bindtap="onTap">
+  <view class="card-category">{{category}}</view>
+  <view class="card-title">{{title}}</view>
+  <view class="card-summary">{{summary}}</view>
+  <view class="card-footer">
+    <text class="card-source">{{source}}</text>
+    <text class="card-time">{{time}}</text>
+  </view>
+</view>

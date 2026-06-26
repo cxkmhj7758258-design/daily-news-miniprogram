@@ -1,0 +1,58 @@
+<view class="page-container">
+  <view class="page-header">
+    <text class="page-title">选择你关注的领域</text>
+    <text class="page-desc">选择至少3个你感兴趣的领域，每天推送精选新闻</text>
+  </view>
+
+  <view class="categories-grid">
+    <view 
+      wx:for="{{categories}}" 
+      wx:key="id" 
+      class="category-item {{item.selected ? 'selected' : ''}}"
+      bindtap="toggleCategory" 
+      data-id="{{item.id}}"
+    >
+      <view class="category-icon">{{item.icon}}</view>
+      <view class="category-name">{{item.name}}</view>
+      <view wx:if="{{item.selected}}" class="check-mark">✓</view>
+    </view>
+  </view>
+
+  <view class="count-info">
+    <text class="count-text">已选择 <text class="count-num">{{selectedCount}}</text> 个领域</text>
+    <text wx:if="{{selectedCount < 3}}" class="count-hint">（至少选3个）</text>
+  </view>
+
+  <view class="action-bar">
+    <button class="btn-primary save-btn {{selectedCount < 3 ? 'disabled' : ''}}" 
+      disabled="{{selectedCount < 3}}" 
+      bindtap="saveSettings"
+    >保存设置</button>
+  </view>
+
+  <!-- 推送设置 -->
+  <view class="section">
+    <view class="section-title">推送设置</view>
+    <view class="setting-row">
+      <view class="setting-info">
+        <text class="setting-label">每日定时推送</text>
+        <text class="setting-desc">每天早上为您推送精选早报</text>
+      </view>
+      <switch checked="{{enablePush}}" color="#07c160" bindchange="togglePush" />
+    </view>
+    <view class="setting-row" wx:if="{{enablePush}}">
+      <view class="setting-info">
+        <text class="setting-label">推送时间</text>
+        <text class="setting-desc">选择您希望收到早报的时间</text>
+      </view>
+      <picker mode="time" value="{{pushTime}}" bindchange="onTimeChange">
+        <view class="time-picker">{{pushTime}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <view class="save-success" wx:if="{{showSuccess}}">
+    <text class="success-icon">✓</text>
+    <text class="success-text">保存成功！明天早上 {{pushTime}} 为你推送</text>
+  </view>
+</view>

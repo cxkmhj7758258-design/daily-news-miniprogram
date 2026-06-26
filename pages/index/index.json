@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "news-card": "/components/news-card/news-card"
+  },
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#f5f5f5"
+}
